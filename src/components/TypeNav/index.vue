@@ -2,7 +2,7 @@
   <!-- 商品分类导航 -->
   <div class="type-nav">
     <div class="container" @mouseleave="leaveIndex">
-      <h2  @mouseenter="enterShow" class="all">全部商品分类</h2>
+      <h2 @mouseenter="enterShow" class="all">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -16,7 +16,6 @@
       <!-- 三级联动 -->
       <!-- transition动画过渡：该元素或者组件 必须有 v-show 或者 v-if  -->
       <transition name="sort">
-
         <div class="sort" v-show="isShow">
           <!-- 使用事件委托+编程式导航 完成路由跳转与传参->搜索页   goSearch事件
                     参数形式：/search?categoryName=XXX&category3Id=XX
@@ -129,10 +128,13 @@ export default {
         } else {
           query.category3Id = category3id;
         }
-        // 整理参数
-        location.query = query;
-        console.log(location);
-        this.$router.push(location);
+        // 如果有params 就合并参数
+        if (this.$route.params) {
+          // 整理参数
+          location.query = query;
+          console.log(location);
+          this.$router.push(location);
+        }
       }
       // console.log(e.target.dataset)
     },
@@ -280,9 +282,8 @@ export default {
     }
     // 定义动画的时间，速率
     .sort-enter-active {
-      transition: all .5s linear;
+      transition: all 0.5s linear;
     }
-
   }
 }
 </style>

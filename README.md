@@ -62,5 +62,14 @@
 
 	总结： 用户操作很频繁，防抖只是执行一次，节流是把频繁的操作变为少量操作
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 开发Home首页当中的ListContainer组件与Floor组件
+	mock数据：npm install -S mockjs
+	使用步骤：
+		1）src中创建mock文件夹
+		2）准备json数据
+		3）把mock数据需要的图片，放至public文件下
+		4）出创建 mockServer.js
+		5)mockServer.js文件在入口文件中引入（至少需要执行一次，才能模拟数据）
+
+
+  

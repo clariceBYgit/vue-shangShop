@@ -66,11 +66,14 @@ export default {
       // 1.字符串或者模板字符串
     // this.$router.push(`/search/${this.keyword}`)
     // 2.对象写法
-    this.$router.push({
-      name:'search',
-      params:{keyword:this.keyword},
-      query:{k:this.keyword.toUpperCase()}
-    })
+
+    // 合并参数 如果有query参数一并带走
+    if(this.$route.query){
+      let location = {name:'search',params:{keyword:this.keyword || undefined}};
+      location.query=this.$route.query;
+      this.$router.push(location);
+    }
+ 
     }
   }
 };
