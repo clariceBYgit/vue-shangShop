@@ -132,11 +132,9 @@ export default {
         if (this.$route.params) {
           // 整理参数
           location.query = query;
-          console.log(location);
           this.$router.push(location);
         }
       }
-      // console.log(e.target.dataset)
     },
     // 当在search组件中  三级联动菜单默认为隐藏，当鼠标进入是 进行展示 + 动画过渡 transition
     enterShow() {

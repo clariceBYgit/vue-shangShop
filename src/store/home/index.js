@@ -1,5 +1,5 @@
 // home 小仓库
-import {getBaseCategoryList,getBannersList, getFloorList} from '@/api'
+import {reqGetBaseCategoryList,reqGetBannersList, reqGetFloorList} from '@/api'
 const state = {
     categoryList:[],
     bannerlist:[],
@@ -9,22 +9,21 @@ const state = {
 const actions = {
     // 发送请求获取数据
     async getCategoryList({commit}){
-        let result = await getBaseCategoryList();
-        // console.log(result);
+        let result = await reqGetBaseCategoryList();
+        // console.log(result)
         if(result.code == 200){
             return commit('GETCATEGORYLIST',result.data);
         }
     
     },
     async getBannersList({commit}){
-        let result = await getBannersList();
+        let result = await reqGetBannersList();
         if(result.code ===200){
             return commit('GETBANNERSLIST',result.data);
         }
     },
     async getFloorList({commit}){
-        let result = await getFloorList();
-        // console.log(result.data)
+        let result = await reqGetFloorList();
         if(result.code ===200){
             return commit('GETFLOORLIST',result.data);
 
@@ -48,7 +47,6 @@ const mutations = {
 const getters = {
 
 };
-console.log(state.floorList)
 export default{
     state,
     mutations,

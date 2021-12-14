@@ -75,6 +75,11 @@ export default {
     }
  
     }
+  },
+  mounted(){
+    this.$bus.$on('clearKeyword',()=>{
+      this.keyword = ''
+    })
   }
 };
 </script>
