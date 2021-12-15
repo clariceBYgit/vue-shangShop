@@ -22,36 +22,45 @@
                 {{ searchParams.keyword }}<i @click="removeKeyword">×</i>
               </li>
               <li v-if="searchParams.trademark" class="with-x">
-                {{ searchParams.trademark.split(':')[1] }}<i @click="removeTradmark">×</i>
+                {{ searchParams.trademark.split(":")[1]
+                }}<i @click="removeTradmark">×</i>
+              </li>
+              <!--平台的售卖的属性值展示 -->
+              <li
+                class="with-x"
+                v-for="(attrValue, index) in searchParams.props"
+                :key="index"
+              >
+                {{ attrValue.split(":")[1] }}<i @click="removeAttr(index)">×</i>
               </li>
             </ul>
           </div>
           <!--selector-->
-          <!-- <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo" /> -->
-          <SearchSelector @trademarkInfo="trademarkInfo" />
+          <SearchSelector @trademarkInfo="trademarkInfo" @attrInfo="attrInfo" />
 
           <!--details-->
           <div class="details clearfix">
             <div class="sui-navbar">
               <div class="navbar-inner filter">
                 <ul class="sui-nav">
-                  <li class="active">
-                    <a href="#">综合</a>
+                  <li :class="{ active: isOne }" @click="changeOrder('1')">
+                    <a
+                      >综合<span
+                        v-show="isOne"
+                        class="iconfont"
+                        :class="{ 'icon-xiangxia3': isDesc, 'icon-up': isAsc }"
+                      ></span
+                    ></a>
                   </li>
-                  <li>
-                    <a href="#">销量</a>
-                  </li>
-                  <li>
-                    <a href="#">新品</a>
-                  </li>
-                  <li>
-                    <a href="#">评价</a>
-                  </li>
-                  <li>
-                    <a href="#">价格⬆</a>
-                  </li>
-                  <li>
-                    <a href="#">价格⬇</a>
+
+                  <li :class="{ active: isTwo }" @click="changeOrder('2')">
+                    <a
+                      >价格<span
+                        v-show="isTwo"
+                        class="iconfont"
+                        :class="{ 'icon-xiangxia3': isDesc, 'icon-up': isAsc }"
+                      ></span
+                    ></a>
                   </li>
                 </ul>
               </div>
@@ -302,9 +311,55 @@ export default {
       this.getData();
     },
     // 删除 面包屑中 品牌的名字、
-    removeTradmark(){
-      this.searchParams.trademark=undefined;
+    removeTradmark() {
+      this.searchParams.trademark = undefined;
+      this.getData();
+    },
+    // 获取商品属性 属性值 子-父  自定义事件
+    /** props
+     * 商品属性的数组: ["属性ID:属性值:属性名"]
+        示例: ["2:6.0～6.24英寸:屏幕尺寸"]
+     * 
+     */
+    attrInfo(attr, attrVaule) {
+      // 整理参数
+      let props = `${attr.attrId}:${attrVaule}:${attr.attrName}`;
+      // 数组去重
+      if (this.searchParams.props.indexOf(props) == -1) {
+        this.searchParams.props.push(props);
+        // 重新发送请求
+        this.getData();
+      }
+    },
+    // 删除面包屑中 商品属性
+    removeAttr(index) {
+      this.searchParams.props.splice(index, 1);
+      this.getData();
+    },
+    // 商品 排序
+    /**
+     * 
+     * 排序方式 
+        1: 综合,2: 价格 asc: 升序,desc: 降序  
+        示例: "1:desc"
+     * 
+     */
+    // 点击切换排序  
+    changeOrder(flag){
+      // 获取浏览器原始的排序  数据的初始值默认为  '1:desc'   综合（1）：降序(desc)   价格（2）：升序（asc）
+      let originSort = this.searchParams.order.split(":")[1];
+      let originFlag = this.searchParams.order.split(":")[0];
+      let newOrder = '';
+      // 由于初始值为 综合   此处比为用户点击综合
+      if(flag === originFlag){
+        newOrder = `${originFlag}:${originSort=='desc'?'asc':'desc'}`;
+      }else{
+        // 否者为点击 价格
+        newOrder = `${flag}:${'desc'}`;
+      }
+      this.searchParams.order = newOrder
       this.getData()
+
     }
   },
 
@@ -313,6 +368,20 @@ export default {
       searchList: (state) => state.search.searchList,
     }),
     ...mapGetters(["goodsList"]),
+    // 商品排序是 1代表的 综合 2代表是价格
+    isOne() {
+      return this.searchParams.order.indexOf("1") != -1;
+    },
+    isTwo() {
+      return this.searchParams.order.indexOf("2") != -1;
+    },
+    // 商品排序时  升序 asc 与降序 desc
+    isAsc() {
+      return this.searchParams.order.indexOf("asc") != -1;
+    },
+    isDesc() {
+      return this.searchParams.order.indexOf("desc") != -1;
+    },
   },
   // 事件监听：监听组件身上的属性的属性值
   watch: {

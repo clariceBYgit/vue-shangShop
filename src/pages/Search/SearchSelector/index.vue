@@ -14,12 +14,13 @@
         <a href="javascript:void(0);">更多</a>
       </div>
     </div>
-    <div class="type-wrap" v-for="item1 in attrsList" :key="item1.attrId">
-      <div class="fl key">{{ item1.attrName }}</div>
+    <!-- 商品的属性 -->
+    <div class="type-wrap" v-for="attr in attrsList" :key="attr.attrId">
+      <div class="fl key">{{ attr.attrName }}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(item2, index) in item1.attrValueList" :key="index">
-            <a>{{ item2 }}</a>
+          <li v-for="(attrValue, index) in attr.attrValueList" :key="index" @click="getAttr(attr,attrValue)">
+            <a>{{ attrValue }}</a>
           </li>
         </ul>
       </div>
@@ -39,6 +40,15 @@ export default {
     // 将品牌信息传递给Search父组件-----自定义事件
     trademark(tradmark){
      this.$emit('trademarkInfo',tradmark)
+    },
+    // 获取商品的属性 属性值 并发送请求  子-父 自定义事件
+    /** props
+     * 商品属性的数组: ["属性ID:属性值:属性名"]
+        示例: ["2:6.0～6.24英寸:屏幕尺寸"]
+     * 
+     */
+    getAttr(attr,attrValue){
+      this.$emit('attrInfo',attr,attrValue)
     }
   }
 };
