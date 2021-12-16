@@ -5,10 +5,14 @@ import store from '@/store';
 Vue.config.productionTip = false;
 // 引入全局组件
 import TypeNav from '@/components/TypeNav';
-import Carsousel from '@/components/Carsousel'
+import Carsousel from '@/components/Carsousel';
+import Pagination from  '@/components/Pagination';
+
 // 注册全局组件：三级联动 TypeNav : 参数一：组件名称，参数二：指定哪个组件
 Vue.component(TypeNav.name,TypeNav);
 Vue.component(Carsousel.name,Carsousel);
+Vue.component(Pagination.name,Pagination);
+
 
 // 引入 mockServer.js ---- mock数据
 import "@/mock/mockServer";

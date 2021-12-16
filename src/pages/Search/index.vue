@@ -111,35 +111,8 @@
                 </li>
               </ul>
             </div>
-            <div class="fr page">
-              <div class="sui-pagination clearfix">
-                <ul>
-                  <li class="prev disabled">
-                    <a href="#">«上一页</a>
-                  </li>
-                  <li class="active">
-                    <a href="#">1</a>
-                  </li>
-                  <li>
-                    <a href="#">2</a>
-                  </li>
-                  <li>
-                    <a href="#">3</a>
-                  </li>
-                  <li>
-                    <a href="#">4</a>
-                  </li>
-                  <li>
-                    <a href="#">5</a>
-                  </li>
-                  <li class="dotted"><span>...</span></li>
-                  <li class="next">
-                    <a href="#">下一页»</a>
-                  </li>
-                </ul>
-                <div><span>共10页&nbsp;</span></div>
-              </div>
-            </div>
+         
+           <Pagination :pageNo='searchParams.pageNo' :total='total' :pageSize='searchParams.pageSize' :continues='5' @getPageNo="getPageNo" />
           </div>
           <!--hotsale-->
           <div class="clearfix hot-sale">
@@ -253,7 +226,7 @@ export default {
         //第几页
         pageNo: 1,
         //每一页展示条数
-        pageSize: 10,
+        pageSize: 3,
         //平台属性的操作
         props: [],
         //品牌
@@ -360,6 +333,13 @@ export default {
       this.searchParams.order = newOrder
       this.getData()
 
+    },
+    // 获取分页器的 pageNo当前是第几页
+    getPageNo(pageNo){
+      // 整理参数
+      this.searchParams.pageNo = pageNo;
+      // 再次发送请求
+      this.getData()
     }
   },
 
@@ -382,6 +362,12 @@ export default {
     isDesc() {
       return this.searchParams.order.indexOf("desc") != -1;
     },
+    // 从store 中 获取总页数
+    ...mapState({
+
+      total:state => state.search.searchList.total
+    }
+    )
   },
   // 事件监听：监听组件身上的属性的属性值
   watch: {
