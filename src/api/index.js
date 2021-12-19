@@ -26,3 +26,6 @@ export const reqGetFloorList = () => mockRequests({url:'/floor',method:"get"});
  */
 export const reqGetSearchInfo = (params) => requests({url:'/list',method:"post",data:params});
 
+// 获取商品详情  /api/item/skuId   get 
+export const reqGetGoodDetails = (skuId) => requests.get(`/item/${ skuId }`);
+

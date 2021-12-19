@@ -74,9 +74,10 @@
                 >
                   <div class="list-wrap">
                     <div class="p-img">
-                      <a href="item.html" target="_blank"
-                        ><img :src="good.defaultImg"
-                      /></a>
+                      <router-link :to="`/detail/${good.id}`">
+                        <img :src="good.defaultImg"/>
+                      </router-link>
+ 
                     </div>
                     <div class="price">
                       <strong>
@@ -111,8 +112,14 @@
                 </li>
               </ul>
             </div>
-         
-           <Pagination :pageNo='searchParams.pageNo' :total='total' :pageSize='searchParams.pageSize' :continues='5' @getPageNo="getPageNo" />
+
+            <Pagination
+              :pageNo="searchParams.pageNo"
+              :total="total"
+              :pageSize="searchParams.pageSize"
+              :continues="5"
+              @getPageNo="getPageNo"
+            />
           </div>
           <!--hotsale-->
           <div class="clearfix hot-sale">
@@ -317,30 +324,29 @@ export default {
         示例: "1:desc"
      * 
      */
-    // 点击切换排序  
-    changeOrder(flag){
+    // 点击切换排序
+    changeOrder(flag) {
       // 获取浏览器原始的排序  数据的初始值默认为  '1:desc'   综合（1）：降序(desc)   价格（2）：升序（asc）
       let originSort = this.searchParams.order.split(":")[1];
       let originFlag = this.searchParams.order.split(":")[0];
-      let newOrder = '';
+      let newOrder = "";
       // 由于初始值为 综合   此处比为用户点击综合
-      if(flag === originFlag){
-        newOrder = `${originFlag}:${originSort=='desc'?'asc':'desc'}`;
-      }else{
+      if (flag === originFlag) {
+        newOrder = `${originFlag}:${originSort == "desc" ? "asc" : "desc"}`;
+      } else {
         // 否者为点击 价格
-        newOrder = `${flag}:${'desc'}`;
+        newOrder = `${flag}:${"desc"}`;
       }
-      this.searchParams.order = newOrder
-      this.getData()
-
+      this.searchParams.order = newOrder;
+      this.getData();
     },
     // 获取分页器的 pageNo当前是第几页
-    getPageNo(pageNo){
+    getPageNo(pageNo) {
       // 整理参数
       this.searchParams.pageNo = pageNo;
       // 再次发送请求
-      this.getData()
-    }
+      this.getData();
+    },
   },
 
   computed: {
@@ -364,10 +370,8 @@ export default {
     },
     // 从store 中 获取总页数
     ...mapState({
-
-      total:state => state.search.searchList.total
-    }
-    )
+      total: (state) => state.search.searchList.total,
+    }),
   },
   // 事件监听：监听组件身上的属性的属性值
   watch: {
