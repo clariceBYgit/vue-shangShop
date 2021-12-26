@@ -29,3 +29,13 @@ export const reqGetSearchInfo = (params) => requests({url:'/list',method:"post",
 // 获取商品详情  /api/item/skuId   get 
 export const reqGetGoodDetails = (skuId) => requests.get(`/item/${ skuId }`);
 
+// 7.添加到购物车(对已有物品进行数量改动)   /api/cart/addToCart/{ skuId }/{ skuNum }   post
+export const reqaddOrUpdateShopCart = (skuId,skuNum) =>  requests.post(`/cart/addToCart/${skuId}/${skuNum}`);
+ 
+// 6.获取购物车列表   /api/cart/cartList get 无参数
+export const reqGetShopCartList = () => requests.get('/cart/cartList');
+
+// 9.删除购物车商品 /api/cart/deleteCart/{skuId}  DELETE
+export const reqDeleteShopCartGood = (skuId) => requests.delete(`/cart/deleteCart/${skuId}`);
+// 8.切换商品选中状态   /api/cart/checkCart/{skuId}/{isChecked}  get
+export const reqUpdateCheckedByid = (skuId,isChecked) => requests.get(`/cart/checkCart/${skuId}/${isChecked}`)

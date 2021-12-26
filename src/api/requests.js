@@ -1,6 +1,6 @@
 
 // 二次封装 axios
-import axios from 'axios'
+import axios from 'axios';
 
 
 // nprogress 进度条的使用
@@ -8,7 +8,8 @@ import nprogress from "nprogress";
 
 // 引入进度条的样式（也可以在原css样式中进行样式的修改）
 import "nprogress/nprogress.css";
-
+// 引入 store 
+import store from '@/store';
 
 // 1.利用axios对象的方法create，去创建一个axios实例
 // 2.requsets就是axios，稍微配置一下
@@ -21,6 +22,13 @@ const requsets = axios.create({
 requsets.interceptors.request.use((config) => {
     // 开启进度条
     nprogress.start();
+    if(store.state.detail.uuid_token){
+        // 请求头 添加一个字段 （userTempId）与后端配合
+        config.headers.userTempId = store.state.detail.uuid_token;
+    }
+    //携带token 给服务器
+    
+
     return config;
 });
 

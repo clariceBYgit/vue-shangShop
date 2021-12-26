@@ -166,7 +166,7 @@ export default {
 
         .img-item {
           border: 1px solid #e1251b;
-          width: 269px;
+          width: 268px;
           float: left;
           overflow: hidden;
           margin: 0 12px 10px;

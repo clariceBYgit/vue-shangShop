@@ -4,8 +4,27 @@ import Register from '@/pages/Register';
 import Home from '@/pages/Home';
 import Search from '@/pages/Search';
 import Detail from '@/pages/Detail';
+import AddCartSuccess from '@/pages/AddCartSuccess';
+import ShopCart from '@/pages/ShopCart';
+
 
 export default [
+    {
+        path: '/shopcart',
+        name:'shopcart',
+        component: ShopCart,
+        meta: {
+            isShow: true
+        }
+    },
+    {
+        path: '/addcartsuccess',
+        name:'addcartsuccess',
+        component: AddCartSuccess,
+        meta: {
+            isShow: true
+        }
+    },
     {
         path: '/home',
         component: Home,
