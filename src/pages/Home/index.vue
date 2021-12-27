@@ -33,7 +33,6 @@ export default {
   mounted() {
     // 派发actions 获取数据
     this.$store.dispatch("getFloorList");
-    
   },
   computed: {
     ...mapState({

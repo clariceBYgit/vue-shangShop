@@ -21,13 +21,15 @@ const requsets = axios.create({
 // 请求拦截器:再发请求之前，请求拦截器可以检测到，可以在请求发出去之前做一些事情
 requsets.interceptors.request.use((config) => {
     // 开启进度条
-    nprogress.start();
     if(store.state.detail.uuid_token){
         // 请求头 添加一个字段 （userTempId）与后端配合
         config.headers.userTempId = store.state.detail.uuid_token;
     }
     //携带token 给服务器
-    
+    if(store.state.user.token){
+        config.headers.token = store.state.user.token;
+    }
+    nprogress.start();
 
     return config;
 });

@@ -1,5 +1,6 @@
 import requests from './requests';
 import mockRequests from './mockRequests';
+import requsets from './requests';
 
 // home search 三级联动接口
 export const  reqGetBaseCategoryList = ()=>requests({url:"/product/getBaseCategoryList",method:'get'});
@@ -38,4 +39,19 @@ export const reqGetShopCartList = () => requests.get('/cart/cartList');
 // 9.删除购物车商品 /api/cart/deleteCart/{skuId}  DELETE
 export const reqDeleteShopCartGood = (skuId) => requests.delete(`/cart/deleteCart/${skuId}`);
 // 8.切换商品选中状态   /api/cart/checkCart/{skuId}/{isChecked}  get
-export const reqUpdateCheckedByid = (skuId,isChecked) => requests.get(`/cart/checkCart/${skuId}/${isChecked}`)
+export const reqUpdateCheckedByid = (skuId,isChecked) => requests.get(`/cart/checkCart/${skuId}/${isChecked}`);
+
+// 获取 验证码  /api/user/passport/sendCode/{phone}  get
+export const reqGetCode = (phone) => requests.get(`/user/passport/sendCode/${phone}`);
+
+// 16.注册用户  /api/user/passport/register POST  参数 phone code password
+export const reqReisterUser = (data) => requests({url:'/user/passport/register',data,method:'post'});
+
+// 2.登录 /api/user/passport/login   POST 参数  phone password
+export const reqUserLogin = (data) => requests({url:'/user/passport/login',data,method:'post'})
+
+// 获取用户信息  /api/user/passport/auth/getUserInfo post  添加请求头 携带服务器下发的token
+export const reqUserInfo = () => requsets.get('/user/passport/auth/getUserInfo');
+
+//退出登陆 /api/user/passport/logout get
+export const reqUserLogout = () => requsets.get('/user/passport/logout');

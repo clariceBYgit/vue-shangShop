@@ -8,7 +8,24 @@ import AddCartSuccess from '@/pages/AddCartSuccess';
 import ShopCart from '@/pages/ShopCart';
 
 
+
 export default [
+    {
+        path: '/register',
+        name:'register',
+        component: Register,
+        meta: {
+            isShow: true
+        }
+    },
+    {
+        path: '/login',
+        name:'login',
+        component: Login,
+        meta: {
+            isShow: true
+        }
+    },
     {
         path: '/shopcart',
         name:'shopcart',
