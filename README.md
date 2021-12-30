@@ -98,3 +98,24 @@
 	注册---通过数据库存储用户信息  名字，密码
 	登录-- 登录成功，后台为区分用户，服务器下发token
 		登录接口：此处不够完美，一般登录成功服务器会下发token，前台持久化存储token ,[带着token找服务器要用户信息展示]
+
+
+###　按需引入　Element　Ｕｉ
+	npm i element-ui -S
+	同时安装　npm install babel-plugin-component -D
+	将 babel.config 修改为：
+	{
+  "presets": [["es2015", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+
+###  自动生成 支付 二维码  qrcode
+	npm install --save qrcode

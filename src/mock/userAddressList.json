@@ -1,0 +1,23 @@
+[
+    {
+        "id": "001",
+        "consignee": "张三",
+        "consigneeTel": "15010658793",
+        "deliveryAddress": "北京市昌平区宏福科技园综合楼6层",
+        "isDefault": "1"
+    },
+    {
+        "id": "002",
+        "consignee": "李四",
+        "consigneeTel": "15485495984",
+        "deliveryAddress": "北京市昌平区宏福科技园综合楼6层",
+        "isDefault": "0"
+    },
+    {
+        "id": "003",
+        "consignee": "王五",
+        "consigneeTel": "151482695458",
+        "deliveryAddress": "北京市昌平区宏福科技园综合楼6层",
+        "isDefault": "0"
+    }
+]

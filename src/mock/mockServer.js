@@ -4,6 +4,8 @@ import Mock from 'mockjs';
 // webpack默认对外暴露：图片，JSON数据格式
 import banners from './banners.json';
 import floors from './floors.json';
+import userAddressList from './userAddressList.json';
 
 Mock.mock("/mock/banners",{code:200,data:banners});
 Mock.mock("/mock/floor",{code:200,data:floors});
+Mock.mock('/mock/addressList',{code:200,data:userAddressList});

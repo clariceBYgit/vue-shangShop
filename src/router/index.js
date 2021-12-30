@@ -69,7 +69,7 @@ router.beforeEach(async (to, from, next) => {
                     next();
                 } catch (error) {
                     // token 失效从新登陆
-                    await store.dispatch('userLogin');
+                    await store.dispatch('userLogout');
                     next('/login')
                 }
             }

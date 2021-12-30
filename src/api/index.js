@@ -55,3 +55,36 @@ export const reqUserInfo = () => requsets.get('/user/passport/auth/getUserInfo')
 
 //退出登陆 /api/user/passport/logout get
 export const reqUserLogout = () => requsets.get('/user/passport/logout');
+
+// 获取用户地址信息 /api/user/userAddress/auth/findUserAddressList get
+// 由于原来的接口没有数据 此处改为 mock 数据
+export const reqAddressInfo = ()=>requests({url:'/user/userAddress/auth/findUserAddressList',method:'get'});
+// export const reqAddressInfo = ()=>mockRequests({url:'/addressList',method:'get'});
+
+
+// 获取订单交易页信息 商品清单 /api/order/auth/trade get
+export const reqAuthTradeInfo = () =>requests.get('/order/auth/trade');
+
+// ***********//
+// 此处之后的操作 不使用 vuex
+
+// 提交订单 /api/order/auth/submitOrder?tradeNo={tradeNo} post
+/**
+ * 参数： 
+ * traderNo  交易编号(拼接在路径中)
+ * consignee 收件人姓名
+ * consigneeTel 收件人电话
+ * deliveryAddress 收件地址 
+ * paymentWay  支付方式 (ONLINE代表在线)
+ * orderComment  订单备注
+ * orderDetailList 存储多个商品对象的数组
+ *  
+ */
+export const reqSubmitOrder = (tradeNo,data) => requests({url:`/order/auth/submitOrder?tradeNo=${tradeNo}`,data,method:'post'});
+
+
+// 13.获取订单支付信息 /api/payment/weixin/createNative/{orderId} get 参数 orderId
+export const reqPayInfo = (orderId) => requests.get(`/payment/weixin/createNative/${orderId}`)
+
+// 14.查询支付订单状态  /api/payment/weixin/queryPayStatus/{orderId}  get   orderId
+export const reqQueryPayStatus = orderId => requests.get(`/payment/weixin/queryPayStatus/${orderId}`)
