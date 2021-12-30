@@ -9,10 +9,38 @@ import ShopCart from '@/pages/ShopCart';
 import Trade from '@/pages/Trade';
 import Pay from '@/pages/Pay';
 import PaySuccess from '@/pages/PaySuccess';
+import Center from '@/pages/Center';
+import MyOrder from '@/pages/Center/MyOrder';
+import GroupOrder from '@/pages/Center/GroupOrder';
 
 
 
 export default [
+    {
+        path:'/center',
+        name:'center',
+        component:Center,
+        children: [
+            {
+              // 当 /user/:id/profile 匹配成功，
+              // UserProfile 会被渲染在 User 的 <router-view> 中
+              path: 'myorder',
+              component: MyOrder
+            },
+            {
+                path:'grouporder',
+                component:GroupOrder
+            },
+            {
+                path:'/center',
+                redirect:'/center/myorder'
+            }
+        ],
+
+        meta:{
+            isShow:true
+        }
+    },
     {
         path: '/pay',
         name:'pay',

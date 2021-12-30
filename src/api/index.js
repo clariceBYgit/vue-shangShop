@@ -88,3 +88,6 @@ export const reqPayInfo = (orderId) => requests.get(`/payment/weixin/createNativ
 
 // 14.查询支付订单状态  /api/payment/weixin/queryPayStatus/{orderId}  get   orderId
 export const reqQueryPayStatus = orderId => requests.get(`/payment/weixin/queryPayStatus/${orderId}`)
+
+// 11.获取我的订单列表 /api/order/auth/{page}/{limit}   GET page  limit
+export const reqMyOrderList = (page,limit) => requests.get(`/order/auth/${page}/${limit}`)
