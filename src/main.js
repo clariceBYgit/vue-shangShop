@@ -28,6 +28,23 @@ import 'swiper/css/swiper.css'
 
 // 统一引入 api 请求函数 （无vuex的时候，也无需每个组件单独进行引入,将其挂载到 vue的原型对象上）
 import * as API from '@/api';
+// 引入图片懒加载
+import laodImg from '@/assets/loading.gif';
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: laodImg
+})
+
+
+// 引入 自定义 插件 myPlugins
+import myPlugins from './plugins/myPlugins';
+// 注册插件
+Vue.use(myPlugins,{
+  name:'upper'
+})
+
+// 引入 vee-validate 表单验证插件
+import "@/plugins/validate";
 
 new Vue({
   // 配置全局时间总线

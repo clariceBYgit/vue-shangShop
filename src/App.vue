@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- 测试 使用  自定义 插件 -->
+    <!-- <h1 v-upper = 'msg'></h1> -->
     <Header />
     <router-view></router-view>
     <Footer  v-show="$route.meta.isShow"/>
@@ -12,6 +14,11 @@ import Footer from './components/Footer'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      msg:'abc'
+    }
+  },
   components: {
     Header,
     Footer

@@ -119,3 +119,62 @@
 
 ###  自动生成 支付 二维码  qrcode
 	npm install --save qrcode
+
+
+###  图片的懒加载  vue-lazyload 
+	npm i vue-lazyload -S
+
+	main.js  中
+			import VueLazyload from 'vue-lazyload'
+			Vue.use(VueLazyload)
+ 
+			// or with options
+			Vue.use(VueLazyload, {
+			preLoad: 1.3,
+			error: 'dist/error.png',
+			loading: 'dist/loading.gif',
+			attempt: 1
+			})
+
+			<img v-lazy="img.src" >
+
+
+### 表单验证  vee-validate
+	安装 版本2 的  npm i vee-validate@2 --save  
+	第一步： 插件的安装与引入
+		import VeeValidate from 'vee-validate';
+		import zh_CN from 'vee-validate/dist/locale/zh_CN';
+		Vue.use(VeeValidate)
+
+	第二步：提示信息
+		VeeValidate.Validator.localize('zh-CN', {
+			messages: {
+				...zh_CN.messages,
+				is: (field) => `${field}必须与密码相同`  //修改内置规则的message，让确认密码和密码相同
+			},
+			attributes: { //给校验的field 属性名映射中文名称
+			phone: '手机号',
+			code:'验证码',
+			password: '密码',
+			password1:'确认密码',
+			isCheck:'协议'
+			}
+		})
+
+	第三步：基本使用
+	<input
+		placeholder='请输入你的手机号'
+		v-model='phone'
+		name='phone'
+		v-validate="{required:true,regex:/^1\d{10}$/}"
+		:class="{invalid:errors.has('phone')}"
+	/>
+	<span class="error-msg">{{errors.first('phone')}}</span>
+	
+	const success = await this.\$validator.validateAll();  ///全部表单验证
+	Veevalidate.Validator.extend('agree',{
+		validate: value => {
+			return value
+		},
+		getMessage: field => field + '必须同意'
+	})
