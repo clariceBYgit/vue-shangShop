@@ -170,7 +170,7 @@
 		:class="{invalid:errors.has('phone')}"
 	/>
 	<span class="error-msg">{{errors.first('phone')}}</span>
-	
+
 	const success = await this.\$validator.validateAll();  ///全部表单验证
 	Veevalidate.Validator.extend('agree',{
 		validate: value => {
@@ -178,3 +178,14 @@
 		},
 		getMessage: field => field + '必须同意'
 	})
+
+
+
+### 打包上线 
+	打包： npm run bulid
+	注意： 项目打包后，代码都是经过压缩加密的 如果运行时报错，输出的错误信息无法准确得知是哪里
+	有了map  就可以想未加密的代码一样，准确的输出是哪有错
+	所以该文件如果项目不需要 是可以去除的
+
+	vue.config.js 配置
+	productionSourceMap:false
