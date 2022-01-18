@@ -182,10 +182,36 @@
 
 
 ### 打包上线 
-	打包： npm run bulid
-	注意： 项目打包后，代码都是经过压缩加密的 如果运行时报错，输出的错误信息无法准确得知是哪里
-	有了map  就可以想未加密的代码一样，准确的输出是哪有错
-	所以该文件如果项目不需要 是可以去除的
+	1.打包： npm run bulid
+		注意： 项目打包后，代码都是经过压缩加密的 如果运行时报错，输出的错误信息无法准确得知是哪里
+		有了map  就可以想未加密的代码一样，准确的输出是哪有错
+		所以该文件如果项目不需要 是可以去除的
 
-	vue.config.js 配置
-	productionSourceMap:false
+		vue.config.js 配置
+		productionSourceMap:false
+	2.购买云服务器
+		1）阿里云 腾讯云
+		2）设置安全组 让服务器开启一些端口
+		3）利用xshell 6 工具 登录服务器
+			linux:  /根目录   cd 跳转目录  mkdir创建目录 ls查看目录结构  pwd查看绝对路径
+
+
+### 配置nginx  (先安装)   yum install nginx
+nginx: 是一个高性能的HTIIP和反向代理的web服务器
+	1.xshell 
+		进入根目录 cd /   => cd etc  =>  cd nginx => vim nginx.conf
+	2. 对文件 nginx.conf 进行编辑  按住insert 进行编辑   按住 esc退出  wq 保存
+		编辑指令  vim nginx.conf  主要添加以下两项(例子)
+
+		location / {
+			root /root/wl/www/shangshop/dist;
+			index index.html;
+			try_files $uri/ /index.html;
+		}
+
+		location /api {
+			proxy_pass http://39.98.123.211; //(具体看页面数据的服务器的地址)
+		}
+
+	3. 运行 nginx服务器  
+		service nginx start	
