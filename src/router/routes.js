@@ -145,5 +145,58 @@ export default [
         path: '/',
         redirect: '/home',
 
+    },
+    // 组件通信 高级 测试
+    {
+        path:'/communication',
+        component: () => import('@/pages/Communication'),
+        children:[
+            {
+                path:'event',
+                component:()=>import('@/pages/Communication/EventTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+            {
+                path:'model',
+                component:()=>import('@/pages/Communication/ModelTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+            {
+                path:'sync',
+                component:()=>import('@/pages/Communication/SyncTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+            {
+                path:'attrs-listener',
+                component:()=>import('@/pages/Communication/AttrsListenersTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+            {
+                path:'children-parent',
+                component:()=>import('@/pages/Communication/ChildrenParentTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+            {
+                path:'scope-slot',
+                component:()=>import('@/pages/Communication/ScopeSlotTest'),
+                meta:{
+                    isHideFooter:true
+                }
+            },
+        ]
     }
+
+
+
+
 ]
