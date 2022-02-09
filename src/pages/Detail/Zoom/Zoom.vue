@@ -49,6 +49,10 @@ export default {
       big.style.top = -2 * top + "px";
     },
   },
+  beforeDestroy(){
+    //解绑当前组件所用的
+    this.$bus.$off('changImg')
+  }
 };
 </script>
 
